@@ -1,0 +1,36 @@
+{
+  "name": "odin-battleship",
+  "version": "1.0.0",
+  "description": "The page I've made to complete The Odin Project's Battleship game project",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "test-watch": "jest --watch .test.js",
+    "start": "webpack serve --open",
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MiguelDeTrool/odin-battleship.git"
+  },
+  "author": "Miguel De Trool",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MiguelDeTrool/odin-battleship/issues"
+  },
+  "homepage": "https://github.com/MiguelDeTrool/odin-battleship#readme",
+  "devDependencies": {
+    "css-loader": "^6.7.1",
+    "eslint": "^8.23.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "jest": "^29.2.2",
+    "sass": "^1.52.3",
+    "sass-loader": "^13.0.0",
+    "style-loader": "^3.3.1",
+    "webpack": "^5.73.0",
+    "webpack-cli": "^4.10.0",
+    "webpack-dev-server": "^4.9.2"
+  }
+}
