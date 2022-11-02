@@ -28,22 +28,32 @@ header {
   justify-content: space-evenly;
 
   .board-container {
+    width: 40vw;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
     border: thin solid red;
-  }
 
-  h3 {
-    text-align: center;
-    font-style: italic;
-    font-size: 1.2rem;
-  }
+    h3 {
+      padding: 15px 0px;
 
-  .board {
-    display: grid;
-    grid-template-rows: repeat(10, 2vw);
-    grid-template-columns: repeat(10, 2vw);
+      text-align: center;
+      font-style: italic;
+      font-size: 1.2rem;
+    }
 
-    & > div {
-      border: thin solid white;
+    .board {
+      display: grid;
+      grid-template-rows: repeat(10, 3vw);
+      grid-template-columns: repeat(10, 3vw);
+
+      .cell {
+        border: 1px solid white;
+
+        &:hover {
+          opacity: 0%;
+        }
+      }
     }
   }
 }
