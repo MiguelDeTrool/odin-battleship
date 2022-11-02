@@ -1,7 +1,7 @@
 import { Gameboard } from "./gameboard.js";
 
 test("It creates a grid and can know if there is a ship on a square", () => {
-  let board = new Gameboard(8);
+  let board = new Gameboard(10);
 
   board.placeShip([3, 3], 2, 0);
 
@@ -10,7 +10,7 @@ test("It creates a grid and can know if there is a ship on a square", () => {
 });
 
 test("It knows which ship is on a given square", () => {
-  let board = new Gameboard(8);
+  let board = new Gameboard(10);
 
   board.placeShip([1, 1], 2, 0);
   board.placeShip([3, 3], 2, 0);
@@ -21,7 +21,7 @@ test("It knows which ship is on a given square", () => {
 });
 
 test("It keeps tracks of hits, on ships and in sea", () => {
-  let board = new Gameboard(8);
+  let board = new Gameboard(10);
 
   board.placeShip([3, 3], 2, 0);
   board.receiveAttack([3, 3]);
@@ -36,7 +36,7 @@ test("It keeps tracks of hits, on ships and in sea", () => {
 });
 
 test("It reports if the square being attacked has already been hit", () => {
-  let board = new Gameboard(8);
+  let board = new Gameboard(10);
 
   board.placeShip([3, 3], 2, 0);
   board.receiveAttack([3, 3]);
@@ -48,7 +48,7 @@ test("It reports if the square being attacked has already been hit", () => {
 });
 
 test("It reports if all ships are sunk", () => {
-  let board = new Gameboard(8);
+  let board = new Gameboard(10);
 
   board.placeShip([3, 3], 2, 0);
   board.placeShip([5, 5], 2, 1);
