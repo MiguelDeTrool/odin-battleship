@@ -11,7 +11,7 @@ body {
 
   height: 100vh;
   display: grid;
-  grid-template-rows: 15% 1fr 6%;
+  grid-template-rows: 15% 8% 1fr 6%;
   grid-template-columns: 1fr;
 }
 
@@ -20,6 +20,11 @@ header {
   font-size: 2.5rem;
   font-weight: bold;
   padding-top: 2vh;
+}
+
+.game-info {
+  text-align: center;
+  font-weight: bold;
 }
 
 .play-area {
