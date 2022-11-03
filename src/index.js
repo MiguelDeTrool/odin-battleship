@@ -1,7 +1,6 @@
 import "./styles/reset.css";
 import "./styles/styles.scss";
 
-import { gridMaker } from "./grid/grid";
+import { gameLoop } from "./gameLoop/gameLoop.js";
 
-gridMaker.fillGrid(".own .board");
-gridMaker.fillGrid(".enemy .board");
+gameLoop.run();

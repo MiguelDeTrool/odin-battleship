@@ -15,7 +15,7 @@ const gridController = (() => {
     }
   };
 
-  const fillGrid = (selector) => {};
+  const fillGrid = (selector, currentPlayer, currentOpponent) => {};
 
   return {
     newGrid,
