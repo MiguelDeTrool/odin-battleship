@@ -2,23 +2,51 @@ import { gridController } from "../DOM/gridController.js";
 import { Player } from "../player/player.js";
 
 const turnHandler = (() => {
-  let _Player1;
-  let _Player2;
-  let _currentPlayer = _Player1;
-  let _currentOpponent = _Player2;
+  let _player1;
+  let _player2;
+  let _currentPlayer = _player2;
+  let _currentOpponent = _player1;
 
-  setPlayers = () => {
-    _Player1 = new Player(_PlayerInfo[1].name, _PlayerInfo[1].isAi);
-    _Player2 = new Player(_PlayerInfo[2].name, _PlayerInfo[2].isAi);
+  const setPlayers = (_playersInfo) => {
+    _player1 = new Player(_playersInfo[1].name, _playersInfo[1].isAi);
+    _player2 = new Player(_playersInfo[2].name, _playersInfo[2].isAi);
+    _addTestShips(); // Comment out to remove test ships placement
   };
 
-  _switchPlayers = () => {
-    let tempPlayer = _currentPlayer;
+  const gameOver = () => {
+    if (
+      _player1.board.areAllShipsSunk() === true ||
+      _player2.board.areAllShipsSunk() === true
+    ) {
+      return true;
+    } else return false;
+  };
+
+  const nextTurn = () => {
+    _switchPlayers();
+    gridController.fillGrids(
+      ".own .board",
+      ".enemy .board",
+      _currentPlayer,
+      _currentOpponent
+    );
+  };
+
+  const _switchPlayers = () => {
+    let temp = _currentPlayer;
     _currentPlayer = _currentOpponent;
-    _currentOpponent = tempPlayer;
+    _currentOpponent = temp;
   };
 
-  return { setPlayers };
+  const _addTestShips = () => {
+    _player1.board.placeShip([1, 1], 2, 1);
+    _player1.board.placeShip([4, 4], 3, 0);
+
+    _player2.board.placeShip([0, 0], 5, 1);
+    _player2.board.placeShip([3, 3], 2, 1);
+  };
+
+  return { setPlayers, gameOver, nextTurn };
 })();
 
 export { turnHandler };

@@ -3,8 +3,8 @@ import { turnHandler } from "./turnHandler.js";
 
 const gameLoop = (() => {
   async function run() {
-    let _PlayersInfo = await gameInit.newGame();
-    turnHandler.setPlayers(_PlayersInfo);
+    let playersInfo = await gameInit.newGame();
+    turnHandler.setPlayers(playersInfo);
     while (turnHandler.gameOver() === false) {
       turnHandler.nextTurn();
     }

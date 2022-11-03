@@ -7,7 +7,7 @@ class Prompt {
       <form action="javascript:void(0)">
         <label for="input">${text}</label>
         <input type="text" id="input" name="input">
-        <input type="submit">
+        <input type="submit" value="✔️">
       </form>
     `;
 
