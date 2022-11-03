@@ -1,10 +1,10 @@
-const gridMaker = (() => {
+const gridController = (() => {
   const _size = 10;
   const _gridCellsNum = _size * _size;
 
   const _resetGrid = (gridElement) => {};
 
-  const fillGrid = (selector) => {
+  const newGrid = (selector) => {
     const gridContainer = document.querySelector(selector);
     _resetGrid(gridContainer);
 
@@ -15,9 +15,11 @@ const gridMaker = (() => {
     }
   };
 
+  const fillGrid = (selector) => {};
+
   return {
-    fillGrid,
+    newGrid,
   };
 })();
 
-export { gridMaker };
+export { gridController };
