@@ -25,16 +25,32 @@ const turnHandler = (() => {
   };
 
   const nextTurn = () => {
-    _switchPlayers();
+    console.log(_currentPlayer);
+
     gridController.fillGrids(
       ".own .board",
       ".enemy .board",
       _currentPlayer,
       _currentOpponent
     );
+
+    const enemyBoard = document.querySelector(".enemy .board");
+    return new Promise((resolve) => {
+      enemyBoard.addEventListener(
+        "click",
+        (e) => {
+          let num = e.target.getAttribute("num");
+          let x = num % 10;
+          let y = parseInt(num / 10);
+          _currentOpponent.board.receiveAttack([x, y]);
+          resolve();
+        },
+        { once: true }
+      );
+    });
   };
 
-  const _switchPlayers = () => {
+  const switchPlayers = () => {
     let temp = _currentPlayer;
     _currentPlayer = _currentOpponent;
     _currentOpponent = temp;
@@ -55,7 +71,7 @@ const turnHandler = (() => {
     _player2.board.placeShip([2, 0], 2, 1);
   };
 
-  return { setPlayers, gameOver, nextTurn };
+  return { setPlayers, gameOver, nextTurn, switchPlayers };
 })();
 
 export { turnHandler };

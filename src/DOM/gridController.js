@@ -11,6 +11,7 @@ const gridController = (() => {
     for (let i = 0; i < _gridCellsNum; i++) {
       let cell = document.createElement("div");
       cell.classList.add("cell");
+      cell.setAttribute("num", i);
       gridContainer.appendChild(cell);
     }
   };
@@ -28,13 +29,22 @@ const gridController = (() => {
     const enemyBoard = document.querySelector(board2selector);
     const enemyBoardCells = enemyBoard.querySelectorAll(".cell");
 
+    // Reinitialize all cells by removing info classes
+    ownBoardCells.forEach((cell) => {
+      cell.classList.remove("has-ship");
+      cell.classList.remove("hit");
+    });
+    enemyBoardCells.forEach((cell) => {
+      cell.classList.remove("has-ship");
+      cell.classList.remove("hit");
+    });
+
     // Go through 2D board array and add classes to cells if they have a ship or have been hit
     for (let i = 0; i < _size; i++) {
       for (let j = 0; j < _size; j++) {
         let ownInfo = currentPlayer.board.squareInfo([i, j]);
         let enemyInfo = currentEnemy.board.squareInfo([i, j]);
         if (ownInfo.hasShip === true) {
-          console.log(ownBoardCells.item(j * 10 + i));
           ownBoardCells.item(j * 10 + i).classList.add("has-ship");
         }
         if (ownInfo.hit === true) {
