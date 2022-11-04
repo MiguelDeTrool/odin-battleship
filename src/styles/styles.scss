@@ -56,29 +56,34 @@ header {
       }
     }
 
-    &.own .hit {
-      background-color: #ff0000cc;
-    }
-
-    &.own .has-ship::after {
-      content: "⬜";
-
-      font-size: 2vw;
-      position: relative;
-      left: min(1vw, 0.25ch);
-      top: min(1vh, 0.25ch);
-    }
-
-    &.enemy .hit {
-      background-color: #ffffffcc;
-
-      &.has-ship::after {
+    &.own {
+      .hit {
         background-color: #ff0000cc;
+      }
+
+      .has-ship::after {
+        content: "⬜";
+
+        font-size: 2vw;
+        position: relative;
+        left: min(1vw, 0.25ch);
+        top: min(1vh, 0.25ch);
       }
     }
 
-    &.enemy .cell:hover {
-      background-color: #ffffff55;
+    &.enemy {
+      //Using extra .cell selector here to add specificity
+      .cell.has-ship {
+        background-color: #ff0000cc;
+      }
+
+      .hit {
+        background-color: #ffffffcc;
+      }
+
+      .cell:hover {
+        background-color: #ffffff55;
+      }
     }
   }
 }
@@ -108,6 +113,13 @@ footer {
   justify-content: center;
 
   background-color: #c2c2c288;
+
+  &.hide {
+    form {
+      width: 100vw;
+      height: 80vh;
+    }
+  }
 
   form {
     display: flex;

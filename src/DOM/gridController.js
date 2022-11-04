@@ -54,7 +54,7 @@ const gridController = (() => {
           enemyBoardCells.item(j * 10 + i).classList.add("hit");
           // Put ship info condition in hit condition, so that only the ship square that have been hit show up
           if (enemyInfo.hasShip === true) {
-            ownBoardCells.item(j * 10 + i).classList.add("has-ship");
+            enemyBoardCells.item(j * 10 + i).classList.add("has-ship");
           }
         }
       }

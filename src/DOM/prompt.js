@@ -1,17 +1,50 @@
 // TO DO add form validation
 
 class Prompt {
-  constructor(text) {
+  constructor(text, type = "text") {
     this.prompt = document.createElement("div");
     this.prompt.classList.add("prompt");
 
-    this.prompt.innerHTML = `
-      <form action="javascript:void(0)">
-        <label for="input">${text}</label>
-        <input type="text" id="input" name="input">
-        <input type="submit" value="✔️">
-      </form>
-    `;
+    switch (type) {
+      case "text":
+        this.prompt.innerHTML = `
+          <form action="javascript:void(0)">
+            <label for="input">${text}</label>
+            <input type="text" id="input" name="input">
+            <input type="submit" value="✔️">
+          </form>
+        `;
+        break;
+      case "OK":
+        this.prompt.innerHTML = `
+            <form action="javascript:void(0)">
+              <div>
+                ${text}
+              </div>
+  
+              <input type="submit" value="OK">
+            </form>
+          `;
+        break;
+      case "yes-no":
+        this.prompt.innerHTML = `
+          <form action="javascript:void(0)">
+            <div>
+            <div>
+              ${text}
+            </div>
+              <input type="radio" id="yes" name="yes-no" value="yes">
+              <label for="yes">Yes</label>
+
+              <input type="radio" id="no" name="yes-no" value="no">
+              <label for="adult">No</label>
+            </div>
+
+            <input type="submit" value="✔️">
+          </form>
+        `;
+        break;
+    }
 
     document.body.appendChild(this.prompt);
   }

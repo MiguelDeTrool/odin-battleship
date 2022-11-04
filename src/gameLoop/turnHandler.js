@@ -1,5 +1,6 @@
 import { gridController } from "../DOM/gridController.js";
 import { Player } from "../player/player.js";
+import { Prompt } from "../DOM/prompt.js";
 
 const turnHandler = (() => {
   let _player1;
@@ -10,8 +11,8 @@ const turnHandler = (() => {
   const setPlayers = (_playersInfo) => {
     _player1 = new Player(_playersInfo[1].name, _playersInfo[1].isAi);
     _player2 = new Player(_playersInfo[2].name, _playersInfo[2].isAi);
-    _currentPlayer = _player2;
-    _currentOpponent = _player1;
+    _currentPlayer = _player1;
+    _currentOpponent = _player2;
     _addTestShips(); // Comment out to remove test ships placement
   };
 
@@ -25,8 +26,6 @@ const turnHandler = (() => {
   };
 
   const nextTurn = () => {
-    console.log(_currentPlayer);
-
     gridController.fillGrids(
       ".own .board",
       ".enemy .board",
@@ -34,27 +33,44 @@ const turnHandler = (() => {
       _currentOpponent
     );
 
-    const enemyBoard = document.querySelector(".enemy .board");
-    return new Promise((resolve) => {
-      enemyBoard.addEventListener(
-        "click",
-        (e) => {
-          let num = e.target.getAttribute("num");
-          let x = num % 10;
-          let y = parseInt(num / 10);
-          _currentOpponent.board.receiveAttack([x, y]);
-          resolve();
-        },
-        { once: true }
-      );
-    });
+    // Wait for input if next player is human, if not play auto computer turn
+    if (_currentPlayer.isAI == false) {
+      const enemyBoard = document.querySelector(".enemy .board");
+      return new Promise((resolve) => {
+        enemyBoard.addEventListener("click", (e) => {
+          if (e.target.classList.contains("hit") === false) {
+            let num = e.target.getAttribute("num");
+            let x = num % 10;
+            let y = parseInt(num / 10);
+
+            _currentPlayer.playMove(_currentOpponent.board, [x, y]);
+
+            resolve();
+          }
+        });
+      });
+    } else {
+      return new Promise((resolve) => {
+        _currentPlayer.playMove(_currentOpponent.board);
+        resolve();
+      });
+    }
   };
 
-  const switchPlayers = () => {
+  async function switchPlayers() {
+    // Show prompt if next player is human, if not, switch player immediately
+    if (_player2.isAI === false) {
+      let switchPlayerPrompt = new Prompt("Click to switch player", "OK");
+      switchPlayerPrompt.prompt.classList.add("hide");
+      await switchPlayerPrompt.formSubmit();
+      switchPlayerPrompt.prompt.remove();
+      switchPlayerPrompt = null;
+    }
+
     let temp = _currentPlayer;
     _currentPlayer = _currentOpponent;
     _currentOpponent = temp;
-  };
+  }
 
   const _addTestShips = () => {
     _player1.board.placeShip([0, 1], 5, 1);

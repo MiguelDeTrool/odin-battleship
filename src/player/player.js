@@ -9,14 +9,21 @@ class Player {
     this.board = new Gameboard(Player.#boardSize);
   }
 
-  playMove(gameboard, coor) {
+  playMove(enemyBoard, coor) {
     if (this.isAI === true) {
-      let x = Math.floor(Math.random() * Player.#boardSize);
-      let y = Math.floor(Math.random() * Player.#boardSize);
-      coor = [x, y];
+      while (true) {
+        let x = Math.floor(Math.random() * Player.#boardSize);
+        let y = Math.floor(Math.random() * Player.#boardSize);
+        coor = [x, y];
+        if (enemyBoard.squareInfo(coor).hit === false) {
+          enemyBoard.receiveAttack(coor);
+        }
+        break;
+      }
     }
+
     try {
-      gameboard.receiveAttack(coor);
+      enemyBoard.receiveAttack(coor);
     } catch (e) {
       return e;
     }
