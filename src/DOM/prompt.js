@@ -1,3 +1,5 @@
+// TO DO add form validation
+
 class Prompt {
   constructor(text) {
     this.prompt = document.createElement("div");
@@ -14,6 +16,7 @@ class Prompt {
     document.body.appendChild(this.prompt);
   }
 
+  // Form submit resolves promise, so game start awaits form being submitted
   formSubmit() {
     let form = this.prompt.querySelector("form");
     return new Promise((resolve) => {

@@ -55,9 +55,31 @@ header {
         border: 1px solid white;
       }
     }
-  }
-  .enemy .cell:hover {
-    background-color: #ffffff55;
+
+    &.own .hit {
+      background-color: #ff0000cc;
+    }
+
+    &.own .has-ship::after {
+      content: "⬜";
+
+      font-size: 2vw;
+      position: relative;
+      left: min(1vw, 0.25ch);
+      top: min(1vh, 0.25ch);
+    }
+
+    &.enemy .hit {
+      background-color: #ffffffcc;
+
+      &.has-ship::after {
+        background-color: #ff0000cc;
+      }
+    }
+
+    &.enemy .cell:hover {
+      background-color: #ffffff55;
+    }
   }
 }
 

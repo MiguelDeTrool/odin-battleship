@@ -41,7 +41,18 @@ const gameInit = (() => {
     }
   }
 
-  return { newGame };
+  async function newTestGame() {
+    gridController.newGrid(".own .board");
+    gridController.newGrid(".enemy .board");
+
+    // Test players
+    return {
+      1: { name: "A", isAi: false },
+      2: { name: "Computer", isAi: false },
+    };
+  }
+
+  return { newGame, newTestGame };
 })();
 
 export { gameInit };

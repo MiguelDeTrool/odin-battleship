@@ -3,16 +3,14 @@ import { turnHandler } from "./turnHandler.js";
 
 const gameLoop = (() => {
   async function run() {
-    let playersInfo = await gameInit.newGame();
+    let playersInfo = await gameInit.newTestGame();
     turnHandler.setPlayers(playersInfo);
-    while (turnHandler.gameOver() === false) {
-      turnHandler.nextTurn();
-    }
+    // while (turnHandler.gameOver() === false) {
+    turnHandler.nextTurn();
+    //}
   }
 
   return { run };
 })();
 
 export { gameLoop };
-
-let shipPositionsTest1 = [];
